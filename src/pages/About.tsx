@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Shield, Zap, Users, BookOpen, Trash2, AlertTriangle } from 'lucide-react';
+import { Shield, Zap, Users, BookOpen, Trash2, AlertTriangle, Database, ExternalLink } from 'lucide-react';
 import { useLang } from '../App';
 import { t } from '../i18n';
 import StatsStrip from '../components/StatsStrip';
@@ -76,6 +76,46 @@ export default function About() {
             </div>
           </div>
         ))}
+
+        {/* Section 8: Open Repair Alliance Licensing & Provenance */}
+        <div className="bg-gradient-to-r from-indigo-50/50 to-blue-50/50 rounded-xl border border-indigo-100 p-6">
+          <div className="flex items-start gap-4">
+            <div className="w-11 h-11 bg-indigo-100/70 rounded-xl flex items-center justify-center shrink-0">
+              <Database className="w-6 h-6 text-indigo-700" />
+            </div>
+            <div>
+              <div className="flex items-center gap-2 mb-1">
+                <h2 className="font-bold text-slate-900">{t(lang, 'about_ora_title')}</h2>
+                <span className="text-[11px] font-semibold bg-indigo-100 text-indigo-800 px-2 py-0.5 rounded-full">
+                  CC BY-SA 4.0
+                </span>
+              </div>
+              <p className="text-slate-600 text-sm leading-relaxed mb-3">
+                {t(lang, 'about_ora_body')}
+              </p>
+              <div className="flex flex-wrap items-center gap-4 text-xs font-medium text-indigo-700">
+                <a
+                  href="https://openrepair.org/open-data/downloads/"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-1 hover:underline"
+                >
+                  <span>Open Repair Alliance Downloads</span>
+                  <ExternalLink className="w-3 h-3" />
+                </a>
+                <a
+                  href="https://creativecommons.org/licenses/by-sa/4.0/"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-1 text-slate-500 hover:text-slate-800 hover:underline"
+                >
+                  <span>License: CC BY-SA 4.0</span>
+                  <ExternalLink className="w-3 h-3" />
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* Stats */}

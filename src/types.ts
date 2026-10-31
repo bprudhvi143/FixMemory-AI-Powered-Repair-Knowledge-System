@@ -1,6 +1,14 @@
 // ── Data Types ─────────────────────────────────────────────────────────────
 
-export type SourceType = 'sample' | 'technician';
+export type SourceType = 'sample' | 'technician' | 'ora_public_dataset';
+
+export type VerificationStatus =
+  | 'sample'
+  | 'technician_submitted'
+  | 'verified'
+  | 'not_independently_verified';
+
+export type RepairStatus = 'Fixed' | 'Repairable' | 'End of life' | 'Unknown';
 
 export type ProblemCategory =
   | 'Power / Boot'
@@ -12,18 +20,33 @@ export type ProblemCategory =
   | 'Battery'
   | 'USB / Ports'
   | 'Audio'
+  | 'Laptop'
+  | 'Desktop computer'
   | 'Other';
 
 export interface RepairCase {
   id: string;
   brand: string;
-  model: string;
-  category: ProblemCategory;
+  model?: string | null;
+  category: ProblemCategory | string;
+  device_category?: string;
   symptoms: string;
-  steps: string;
-  solution: string;
+  steps?: string | null;
+  solution?: string | null;
   sourceType: SourceType;
+  verificationStatus?: VerificationStatus;
   createdAt: string; // ISO date string
+
+  // Open Repair Alliance (ORDS) specific fields
+  externalSourceId?: string | null;
+  repairStatus?: RepairStatus | string;
+  repairStatusRaw?: string;
+  repairBarrier?: string | null;
+  country?: string | null;
+  eventDate?: string | null;
+  sourceProvider?: string | null;
+  datasetRelease?: string;
+  license?: string;
 }
 
 // ── AI Result Types ─────────────────────────────────────────────────────────

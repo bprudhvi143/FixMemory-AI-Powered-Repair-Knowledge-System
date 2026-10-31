@@ -7,6 +7,7 @@ import Home from './pages/Home';
 import LogCase from './pages/LogCase';
 import Results from './pages/Results';
 import About from './pages/About';
+import AdminImport from './pages/AdminImport';
 
 // ── Language Context ─────────────────────────────────────────────────────────
 
@@ -35,6 +36,8 @@ export default function App() {
             <Route path="/log" element={<LogCase />} />
             <Route path="/results" element={<Results />} />
             <Route path="/about" element={<About />} />
+            {/* Admin only route - not exposed in general technician navigation */}
+            <Route path="/admin/import" element={<AdminImport />} />
           </Routes>
         </main>
         <Footer />

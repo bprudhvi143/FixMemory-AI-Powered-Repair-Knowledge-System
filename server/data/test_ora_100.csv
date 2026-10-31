@@ -1,0 +1,101 @@
+id,data_provider,event_date,product_category,brand,model,problem,repair_status,repair_barrier_if_end_of_life,country
+ORA_101,The Restart Project,2023-01-10,Laptop,Dell,,Dell Inspiron laptop completely dead no power light or charging indication,1,,GB
+ORA_102,Repair Cafe Wales,2023-01-12,Laptop,Dell,,Dell Latitude power jack loose and battery not charging,1,,GB
+ORA_103,Bangalore Repair Collective,2023-01-15,Laptop,Dell,,Dell laptop power button does not respond after bios update,3,Motherboard replacement required,IN
+ORA_104,Repair Cafe International,2023-01-18,Laptop,Dell,,Dell XPS power adapter plugged in but says not charging,2,Charger communication failure,US
+ORA_105,The Restart Project,2023-01-20,Laptop,Dell,,Dell laptop power cord sparks at charging port,3,Burned DC jack PCB,GB
+ORA_106,Repair Cafe Wales,2023-01-25,Desktop computer,Dell,,Dell Optiplex desktop power supply fan spins but no display or POST,1,,GB
+ORA_107,Bangalore Repair Collective,2023-01-28,Laptop,Dell,,Dell Inspiron shut down during heavy load and will not power back on,1,,IN
+ORA_108,Repair Cafe International,2023-02-02,Laptop,Dell,,Dell Vostro power LED blinks 3 amber and 5 white lights,2,RAM seated improperly,DE
+ORA_109,The Restart Project,2023-02-05,Laptop,Dell,,Dell laptop battery charges only when cord held at specific angle,1,,GB
+ORA_110,Bangalore Repair Collective,2023-02-10,Laptop,Dell,,Dell laptop won't turn on on battery power only works when plugged in,1,,IN
+ORA_111,The Restart Project,2023-02-12,Laptop,HP,,HP Pavilion laptop heats up rapidly and shuts down within 10 minutes of boot,1,,GB
+ORA_112,Repair Cafe Wales,2023-02-15,Laptop,HP,,HP laptop overheating bottom chassis burning to touch,1,,GB
+ORA_113,Bangalore Repair Collective,2023-02-18,Laptop,HP,,HP Omen gaming laptop high CPU temperature exceeding 95 degrees,1,,IN
+ORA_114,Repair Cafe International,2023-02-22,Laptop,HP,,HP EliteBook fan making loud rattling noise and machine gets hot,1,,US
+ORA_115,The Restart Project,2023-02-25,Laptop,HP,,HP Envy laptop overheating message 90D fan error on boot,3,Heatsink fan seized up,GB
+ORA_116,Repair Cafe Wales,2023-03-01,Laptop,HP,,HP laptop thermal throttling causing severe lag and stuttering,1,,GB
+ORA_117,Bangalore Repair Collective,2023-03-05,Desktop computer,HP,,HP Pavilion desktop CPU fan runs at full blast constantly,1,,IN
+ORA_118,Repair Cafe International,2023-03-08,Laptop,HP,,HP ProBook vents clogged with thick dust causing shutdowns,1,,DE
+ORA_119,The Restart Project,2023-03-12,Laptop,HP,,HP laptop shuts off unexpectedly without warning when watching video,1,,GB
+ORA_120,Bangalore Repair Collective,2023-03-15,Laptop,HP,,HP laptop thermal paste completely dried out and crumbling,1,,IN
+ORA_121,The Restart Project,2023-03-18,Laptop,Lenovo,,Lenovo ThinkPad battery drains from 100 percent to zero in 20 minutes,1,,GB
+ORA_122,Repair Cafe Wales,2023-03-22,Laptop,Dell,,Dell XPS battery health degraded to 15 percent,2,Battery replacement needed,GB
+ORA_123,Bangalore Repair Collective,2023-03-25,Laptop,HP,,HP Pavilion battery swollen and warped the lower casing,3,Battery danger,IN
+ORA_124,Repair Cafe International,2023-03-28,Laptop,Acer,,Acer Aspire laptop battery not detected by Windows,1,,US
+ORA_125,The Restart Project,2023-04-02,Laptop,Apple,,MacBook Pro battery service recommended icon showing,2,Glued in battery,GB
+ORA_126,Repair Cafe Wales,2023-04-05,Laptop,Asus,,Asus ZenBook battery drains quickly when asleep in bag,1,,GB
+ORA_127,Bangalore Repair Collective,2023-04-08,Laptop,Lenovo,,Lenovo IdeaPad internal battery won't hold charge,1,,IN
+ORA_128,Repair Cafe International,2023-04-12,Laptop,Dell,,Dell Latitude battery percentage jumps from 80 percent to 5 percent,2,Calibration failure,DE
+ORA_129,The Restart Project,2023-04-15,Laptop,HP,,HP laptop runs only on AC adapter battery completely dead,1,,GB
+ORA_130,Bangalore Repair Collective,2023-04-18,Laptop,Samsung,,Samsung laptop battery discharges rapidly while gaming,1,,IN
+ORA_131,The Restart Project,2023-04-20,Laptop,Lenovo,,Lenovo screen flickers when lid is adjusted,1,,GB
+ORA_132,Repair Cafe Wales,2023-04-25,Laptop,Dell,,Dell screen has horizontal colored lines,2,Damaged LCD panel,GB
+ORA_133,Bangalore Repair Collective,2023-04-28,Laptop,HP,,HP laptop screen blank but external monitor works via HDMI,1,,IN
+ORA_134,Repair Cafe International,2023-05-02,Laptop,Acer,,Acer screen backlight fails keyboard stays lit,3,Backlight fuse blown,US
+ORA_135,The Restart Project,2023-05-05,Desktop computer,Dell,,Dell Optiplex dual display output not working on DisplayPort,1,,GB
+ORA_136,Repair Cafe Wales,2023-05-08,Laptop,Asus,,Asus laptop screen flickers when moving hinge,1,,GB
+ORA_137,Bangalore Repair Collective,2023-05-12,Laptop,Lenovo,,Lenovo ThinkPad screen goes completely dark randomly,1,,IN
+ORA_138,Repair Cafe International,2023-05-15,Desktop computer,HP,,HP desktop display glitches and shows artifacts,2,Faulty GPU,DE
+ORA_139,The Restart Project,2023-05-18,Laptop,Apple,,MacBook Air display has vertical pink lines,3,Damaged flex cable,GB
+ORA_140,Bangalore Repair Collective,2023-05-22,Laptop,Dell,,Dell Inspiron screen bezel cracked and pinched cable,1,,IN
+ORA_141,The Restart Project,2023-05-25,Laptop,HP,,HP keyboard liquid spill sticky keys spacebar stuck,1,,GB
+ORA_142,Repair Cafe Wales,2023-05-28,Laptop,Dell,,Dell Latitude keyboard keys typing double letters,1,,GB
+ORA_143,Bangalore Repair Collective,2023-06-02,Laptop,Lenovo,,Lenovo ThinkPad trackpoint drifting across screen,1,,IN
+ORA_144,Repair Cafe International,2023-06-05,Laptop,Acer,,Acer Aspire touchpad not clicking,1,,US
+ORA_145,The Restart Project,2023-06-08,Laptop,Apple,,MacBook butterfly keyboard repeating spacebar,2,Known defect,GB
+ORA_146,Repair Cafe Wales,2023-06-12,Desktop computer,Lenovo,,Lenovo desktop USB keyboard not recognized in BIOS,1,,GB
+ORA_147,Bangalore Repair Collective,2023-06-15,Laptop,Asus,,Asus laptop several keyboard keys missing keycaps,1,,IN
+ORA_148,Repair Cafe International,2023-06-18,Laptop,Dell,,Dell Inspiron touchpad unresponsive after Windows update,1,,DE
+ORA_149,The Restart Project,2023-06-22,Laptop,HP,,HP Envy keyboard backlight not turning on,1,,GB
+ORA_150,Bangalore Repair Collective,2023-06-25,Laptop,Lenovo,,Lenovo IdeaPad power button integrated in keyboard broken,3,Keybed riveted,IN
+ORA_151,The Restart Project,2023-06-28,Laptop,Dell,,Dell Wi-Fi drops connection every 5 minutes,1,,GB
+ORA_152,Repair Cafe Wales,2023-07-02,Laptop,HP,,HP laptop Wi-Fi switch shows disabled in hardware,1,,GB
+ORA_153,Bangalore Repair Collective,2023-07-05,Laptop,Lenovo,,Lenovo ThinkPad Wi-Fi card not detected after sleep,1,,IN
+ORA_154,Repair Cafe International,2023-07-08,Laptop,Acer,,Acer Aspire slow internet speed Wi-Fi antenna disconnected,1,,US
+ORA_155,The Restart Project,2023-07-12,Desktop computer,Dell,,Dell desktop Ethernet port lights blinking amber no DHCP IP,1,,GB
+ORA_156,Repair Cafe Wales,2023-07-15,Laptop,Asus,,Asus laptop Bluetooth stops working when Wi-Fi is active,2,Interference,GB
+ORA_157,Bangalore Repair Collective,2023-07-18,Laptop,Dell,,Dell Latitude cannot find 5GHz Wi-Fi network,1,,IN
+ORA_158,Repair Cafe International,2023-07-22,Laptop,HP,,HP laptop airplane mode stuck on cannot turn on Wi-Fi,1,,DE
+ORA_159,The Restart Project,2023-07-25,Laptop,Apple,,MacBook Wi-Fi no hardware installed error,3,Logic board failure,GB
+ORA_160,Bangalore Repair Collective,2023-07-28,Laptop,Lenovo,,Lenovo laptop Wi-Fi antenna wire cut in hinge,1,,IN
+ORA_161,The Restart Project,2023-08-01,Laptop,Dell,,Dell laptop boots to blue screen INACCESSIBLE BOOT DEVICE,1,,GB
+ORA_162,Repair Cafe Wales,2023-08-05,Laptop,HP,,HP laptop hard drive clicking noise on power on,2,Disk failure,GB
+ORA_163,Bangalore Repair Collective,2023-08-08,Laptop,Lenovo,,Lenovo ThinkPad NVMe SSD not recognized in BIOS,1,,IN
+ORA_164,Repair Cafe International,2023-08-12,Desktop computer,Dell,,Dell Optiplex Windows boot loop automatic repair fails,1,,US
+ORA_165,The Restart Project,2023-08-15,Laptop,Acer,,Acer laptop operating system not found error on startup,1,,GB
+ORA_166,Repair Cafe Wales,2023-08-18,Laptop,Asus,,Asus ZenBook corrupted bootloader after update,1,,GB
+ORA_167,Bangalore Repair Collective,2023-08-22,Laptop,Dell,,Dell Inspiron slow performance 100 percent disk usage,1,,IN
+ORA_168,Repair Cafe International,2023-08-25,Desktop computer,HP,,HP desktop smart hard disk error 301,3,Drive dead,DE
+ORA_169,The Restart Project,2023-08-28,Laptop,HP,,HP Pavilion laptop stuck on spinning circle at boot,1,,GB
+ORA_170,Bangalore Repair Collective,2023-09-02,Laptop,Lenovo,,Lenovo laptop SSD bad sectors preventing boot,1,,IN
+ORA_171,The Restart Project,2023-09-05,Laptop,Dell,,Dell USB-C charging port broken and pushed inside case,3,SMD port ripped from traces,GB
+ORA_172,Repair Cafe Wales,2023-09-08,Laptop,HP,,HP laptop USB ports not supplying power to phone or flash drive,1,,GB
+ORA_173,Bangalore Repair Collective,2023-09-12,Laptop,Lenovo,,Lenovo ThinkPad Thunderbolt port not recognized,1,,IN
+ORA_174,Repair Cafe International,2023-09-15,Desktop computer,Dell,,Dell desktop front USB ports physical pins bent and touching,1,,US
+ORA_175,The Restart Project,2023-09-18,Laptop,Acer,,Acer laptop headphone jack broke off inside connector,1,,GB
+ORA_176,Repair Cafe Wales,2023-09-22,Laptop,Asus,,Asus laptop HDMI port output cut in and out when wiggled,1,,GB
+ORA_177,Bangalore Repair Collective,2023-09-25,Laptop,Dell,,Dell Latitude SD card reader spring mechanism stuck,1,,IN
+ORA_178,Repair Cafe International,2023-09-28,Laptop,HP,,HP laptop USB power surge warning pop up on Windows,2,Short on 5V rail,DE
+ORA_179,The Restart Project,2023-10-02,Laptop,Apple,,MacBook Pro USB-C ports only work on one side,3,T2 chip circuit issue,GB
+ORA_180,Bangalore Repair Collective,2023-10-05,Desktop computer,HP,,HP desktop rear audio port green jack no sound,1,,IN
+ORA_181,The Restart Project,2023-10-08,Laptop,Dell,,Dell Inspiron no audio output speakers crackle then silent,1,,GB
+ORA_182,Repair Cafe Wales,2023-10-12,Laptop,HP,,HP laptop microphone not picking up sound in video calls,1,,GB
+ORA_183,Bangalore Repair Collective,2023-10-15,Laptop,Lenovo,,Lenovo ThinkPad audio driver code 10 error in device manager,1,,IN
+ORA_184,Repair Cafe International,2023-10-18,Laptop,Acer,,Acer Aspire internal speaker blown sounds distorted,2,Replacement speaker needed,US
+ORA_185,The Restart Project,2023-10-22,Laptop,Apple,,MacBook Air startup chime works but no sound in macOS,1,,GB
+ORA_186,Repair Cafe Wales,2023-10-25,Laptop,Asus,,Asus laptop webcam recognized as unknown USB device,1,,GB
+ORA_187,Bangalore Repair Collective,2023-10-28,Desktop computer,Dell,,Dell Optiplex internal piezo buzzer beeping 4 times on boot,1,,IN
+ORA_188,Repair Cafe International,2023-11-02,Laptop,Dell,,Dell Latitude audio cuts out when moving headphone plug,1,,DE
+ORA_189,The Restart Project,2023-11-05,Laptop,HP,,HP Pavilion laptop webcam shutter stuck in closed position,1,,GB
+ORA_190,Bangalore Repair Collective,2023-11-08,Laptop,Lenovo,,Lenovo laptop audio jack sensing wrong device plugged in,1,,IN
+ORA_191,The Restart Project,2023-11-12,Small appliance,Morphy Richards,,Toaster does not pop up bread burns,3,Heating element broken,GB
+ORA_192,Repair Cafe Wales,2023-11-15,Mobile,Apple,,iPhone 11 cracked back glass and camera lens,2,Laser machine needed,GB
+ORA_193,Bangalore Repair Collective,2023-11-18,Vacuum cleaner,Eureka Forbes,,Vacuum cleaner motor smells like burning electrical wire,3,Armature burned,IN
+ORA_194,Repair Cafe International,2023-11-22,Television,LG,,LG smart TV black screen with sound,2,LED backlight strips failed,US
+ORA_195,The Restart Project,2023-11-25,Power tool,Bosch,,Cordless drill battery pack does not charge on dock,1,,GB
+ORA_196,Repair Cafe Wales,2023-11-28,Audio equipment,Bose,,Bluetooth speaker turns off after 2 seconds,1,,GB
+ORA_197,Bangalore Repair Collective,2023-12-02,Small appliance,Bajaj,,Electric kettle base connection loose,1,,IN
+ORA_198,Repair Cafe International,2023-12-05,Lamp,IKEA,,Desk lamp switch does not toggle on,1,,DE
+ORA_199,The Restart Project,2023-01-10,Laptop,Dell,,Dell Inspiron laptop completely dead no power light,1,,GB
+ORA_200,Bangalore Repair Collective,2023-12-10,Laptop,,,Blank brand record test row,0,,IN

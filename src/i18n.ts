@@ -28,6 +28,17 @@ type TranslationKeys = {
   card_steps: string;
   card_source_sample: string;
   card_source_tech: string;
+  card_source_ora: string;
+  card_ora_note: string;
+  card_repair_status: string;
+  card_repair_barrier: string;
+  card_country: string;
+  card_event_date: string;
+  card_provider: string;
+  card_status_fixed: string;
+  card_status_repairable: string;
+  card_status_eol: string;
+  card_status_unknown: string;
   card_no_recent: string;
   card_open_case: string;
   card_close: string;
@@ -77,6 +88,8 @@ type TranslationKeys = {
   about_diff_body: string;
   about_team_title: string;
   about_team_body: string;
+  about_ora_title: string;
+  about_ora_body: string;
   stats_users: string;
   stats_cases: string;
   stats_churn: string;
@@ -115,6 +128,17 @@ const en: TranslationKeys = {
   card_steps: 'Troubleshooting Steps Taken',
   card_source_sample: 'Sample',
   card_source_tech: 'Technician Submitted',
+  card_source_ora: 'Open Repair Alliance',
+  card_ora_note: 'Historical repair attempt record from the Open Repair Alliance. May not contain step-by-step diagnostic procedures.',
+  card_repair_status: 'Repair Outcome',
+  card_repair_barrier: 'Repair Barrier',
+  card_country: 'Country',
+  card_event_date: 'Event Date',
+  card_provider: 'Data Provider',
+  card_status_fixed: 'Fixed',
+  card_status_repairable: 'Repairable',
+  card_status_eol: 'End of life',
+  card_status_unknown: 'Unknown',
   card_no_recent: 'No repair cases yet. Log the first one!',
   card_open_case: 'View Full Case',
   card_close: 'Close',
@@ -161,6 +185,8 @@ const en: TranslationKeys = {
   about_diff_body: 'FixMemory focuses on a searchable, AI-driven database of technician-documented repair cases. We do not claim that every submitted case is verified, but we surface real repair histories from the field.',
   about_team_title: 'Our Team',
   about_team_body: 'FixMemory is built by Team Eleven — a student founding team focused on making repair knowledge accessible to every technician in India.',
+  about_ora_title: 'Open Repair Alliance Dataset & Licensing',
+  about_ora_body: 'FixMemory integrates public repair data from the Open Repair Alliance (ORDS standard, available at openrepair.org/open-data/downloads/). This data is licensed under Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0). We preserve original provenance, repair outcomes, and source attributions.',
   stats_users: 'Active Tech Users',
   stats_cases: 'Repair Cases',
   stats_churn: 'Churn Rate',
@@ -197,6 +223,17 @@ const te: TranslationKeys = {
   card_steps: 'తీసుకున్న పరిష్కార చర్యలు',
   card_source_sample: 'నమూనా',
   card_source_tech: 'టెక్నీషియన్ సమర్పించారు',
+  card_source_ora: 'ఓపెన్ రిపేర్ అలయన్స్',
+  card_ora_note: 'ఓపెన్ రిపేర్ అలయన్స్ నుండి చారిత్రిక మరమ్మతు రికార్డు. వివరణాత్మక పరిష్కార చర్యలు నమోదు కాలేదు.',
+  card_repair_status: 'మరమ్మతు ఫలితం',
+  card_repair_barrier: 'మరమ్మతు అడ్డంకి',
+  card_country: 'దేశం',
+  card_event_date: 'తేదీ',
+  card_provider: 'డేటా ప్రొవైడర్',
+  card_status_fixed: 'పరిష్కరించబడింది',
+  card_status_repairable: 'మరమ్మతు చేయదగినది',
+  card_status_eol: 'ముగింపు స్థితి',
+  card_status_unknown: 'తెలియదు',
   card_no_recent: 'ఇంకా మరమ్మతు కేసులు లేవు. మొదటిది నమోదు చేయండి!',
   card_open_case: 'పూర్తి కేసు చూడండి',
   card_close: 'మూసివేయి',
@@ -243,6 +280,8 @@ const te: TranslationKeys = {
   about_diff_body: 'FixMemory టెక్నీషియన్-నమోదు చేసిన మరమ్మతు కేసుల శోధించగలిగే, AI-ఆధారిత డేటాబేస్పై దృష్టి పెడుతుంది.',
   about_team_title: 'మా బృందం',
   about_team_body: 'FixMemory Team Eleven చేత నిర్మించబడింది — భారతదేశంలోని ప్రతి టెక్నీషియన్‌కు మరమ్మతు జ్ఞానాన్ని అందుబాటులో ఉంచడంపై దృష్టి పెట్టిన విద్యార్థి వ్యవస్థాపక బృందం.',
+  about_ora_title: 'ఓపెన్ రిపేర్ అలయన్స్ డేటా మరియు లైసెన్సింగ్',
+  about_ora_body: 'FixMemory ఓపెన్ రిపేర్ అలయన్స్ (ORDS ప్రమాణం) నుండి బహిరంగ మరమ్మతు డేటాను అనుసంధానిస్తుంది. ఈ డేటా క్రియేటివ్ కామన్స్ అట్రిబ్యూషన్-షేర్‌అలైక్ 4.0 ఇంటర్నేషనల్ (CC BY-SA 4.0) కింద లైసెన్స్ చేయబడింది.',
   stats_users: 'యాక్టివ్ టెక్ యూజర్లు',
   stats_cases: 'మరమ్మతు కేసులు',
   stats_churn: 'చర్న్ రేట్',

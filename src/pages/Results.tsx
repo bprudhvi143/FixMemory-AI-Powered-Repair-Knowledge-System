@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
-import { useSearchParams, Link, useNavigate } from 'react-router-dom';
+import { useSearchParams, Link } from 'react-router-dom';
 import { ArrowLeft, RefreshCw, AlertCircle } from 'lucide-react';
 import { useLang } from '../App';
 import { t } from '../i18n';
-import { getAllCases, localSearch } from '../storage';
+import { getAllCasesWithOra, localSearch } from '../storage';
 import type { AIResult, RepairCase } from '../types';
 import AIResults from '../components/AIResults';
 
@@ -12,35 +12,50 @@ type SearchState = 'loading' | 'success' | 'error' | 'idle';
 export default function Results() {
   const { lang } = useLang();
   const [params] = useSearchParams();
-  const navigate = useNavigate();
   const query = params.get('q') ?? '';
 
   const [state, setState] = useState<SearchState>('idle');
   const [result, setResult] = useState<AIResult | null>(null);
   const [isDemo, setIsDemo] = useState(false);
-  const allCases = getAllCases();
+  const [activeCases, setActiveCases] = useState<RepairCase[]>([]);
 
   const runSearch = async () => {
     if (!query.trim()) return;
     setState('loading');
     setResult(null);
 
+    // Fetch unified cases (local + ORA from backend)
+    const combinedCases = await getAllCasesWithOra();
+    setActiveCases(combinedCases);
+
     try {
       const response = await fetch('/api/match', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ query, cases: allCases }),
+        body: JSON.stringify({ query, cases: combinedCases }),
       });
 
       if (!response.ok) throw new Error('API error');
-      const data = await response.json() as AIResult;
+      const data = (await response.json()) as AIResult & { available_records_used?: RepairCase[] };
+
+      // If backend returned available records, merge them into activeCases
+      if (data.available_records_used) {
+        setActiveCases(prev => {
+          const map = new Map(prev.map(c => [c.id, c]));
+          for (const r of data.available_records_used!) {
+            map.set(r.id, r);
+          }
+          return Array.from(map.values());
+        });
+      }
+
       setResult(data);
       setIsDemo(false);
       setState('success');
     } catch {
-      // Fall back to local demo search
+      // Fall back to local demo search with ORA awareness
       try {
-        const matched = localSearch(query);
+        const matched = localSearch(query, combinedCases);
         const demoResult: AIResult = buildDemoResult(query, matched);
         setResult(demoResult);
         setIsDemo(true);
@@ -76,7 +91,7 @@ export default function Results() {
           </div>
           <p className="text-slate-700 font-semibold">{t(lang, 'results_loading')}</p>
           <p className="text-slate-400 text-sm mt-1 max-w-xs">
-            Analysing symptoms against {allCases.length} repair records...
+            Analysing symptoms against historical technician cases & Open Repair Alliance records...
           </p>
         </div>
       )}
@@ -104,7 +119,7 @@ export default function Results() {
         <>
           <AIResults
             result={result}
-            cases={allCases}
+            cases={activeCases}
             query={query}
             isDemo={isDemo}
           />
@@ -137,7 +152,7 @@ export default function Results() {
   );
 }
 
-// ── Demo fallback builder ─────────────────────────────────────────────────────
+// ── Demo fallback builder with ORA trust awareness ──────────────────────────
 
 function buildDemoResult(query: string, matched: RepairCase[]): AIResult {
   const causes: string[] = [];
@@ -148,35 +163,47 @@ function buildDemoResult(query: string, matched: RepairCase[]): AIResult {
     causes.push('Degraded thermal paste between CPU/GPU and heatsink');
   }
   if (q.includes('screen') || q.includes('flicker') || q.includes('display') || q.includes('blank')) {
-    causes.push('Loose or damaged display cable connection');
-    causes.push('GPU driver issue or outdated firmware');
+    causes.push('Loose or damaged display cable connection (eDP/LVDS)');
+    causes.push('GPU driver issue, panel failure, or backlight circuit defect');
   }
   if (q.includes('power') || q.includes('boot') || q.includes('start') || q.includes('turn on')) {
-    causes.push('Faulty DC power jack or charging circuit');
-    causes.push('Discharged or failed CMOS battery');
+    causes.push('Faulty DC power jack, shorted input MOSFET, or dead adapter');
+    causes.push('Discharged CMOS battery or corrupt BIOS chip firmware');
   }
   if (q.includes('wifi') || q.includes('network') || q.includes('internet') || q.includes('disconnect')) {
     causes.push('Outdated or corrupt Wi-Fi driver');
-    causes.push('Failing Wi-Fi card hardware');
+    causes.push('Failing Wi-Fi card hardware or loose antenna connection');
   }
   if (q.includes('battery') || q.includes('drain')) {
-    causes.push('Battery wear causing reduced capacity');
-    causes.push('Background processes consuming excessive power');
+    causes.push('Battery wear causing reduced internal capacity');
+    causes.push('Background processes or failing charging controller IC');
   }
   if (causes.length === 0) {
     causes.push('Insufficient information — describe symptoms more specifically for better results');
   }
 
   return {
-    problem_summary: `Local analysis of: "${query}"`,
+    problem_summary: `Analysis of: "${query}" across historical repair cases`,
     possible_causes: causes,
-    matches: matched.map(c => ({
-      case_id: c.id,
-      device_model: `${c.brand} ${c.model}`,
-      symptoms: c.symptoms,
-      solution: c.solution,
-      relevance_reason: `Keyword similarity found in symptoms or solution description`,
-    })),
+    matches: matched.slice(0, 10).map(c => {
+      const isOra = c.sourceType === 'ora_public_dataset';
+      const outcome = c.repairStatus || 'Recorded';
+      const relevanceReason = isOra
+        ? `Open Repair Alliance historical record (Outcome: ${outcome}). Note: specific component repair steps were not documented in this dataset.`
+        : `Keyword similarity found in documented repair symptoms or solution.`;
+
+      const solutionDisplay = isOra
+        ? `Repair outcome: ${outcome}${c.repairBarrier ? ` (Barrier: ${c.repairBarrier})` : ''}`
+        : c.solution || 'No solution recorded.';
+
+      return {
+        case_id: c.id,
+        device_model: c.model ? `${c.brand} ${c.model}` : `${c.brand} (${c.category || 'Computer'})`,
+        symptoms: c.symptoms,
+        solution: solutionDisplay,
+        relevance_reason: relevanceReason,
+      };
+    }),
     no_match: matched.length === 0,
     additional_information_needed:
       matched.length === 0

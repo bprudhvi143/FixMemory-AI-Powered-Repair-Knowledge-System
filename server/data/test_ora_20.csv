@@ -1,0 +1,21 @@
+id,data_provider,event_date,product_category,brand,model,problem,repair_status,repair_barrier_if_end_of_life,country
+ORA_001,The Restart Project,2023-04-12,Laptop,Dell,,Will not power on even when connected to original charger,1,,GB
+ORA_002,Repair Cafe Wales,2023-05-18,Laptop,HP,,Overheats and fan spins at maximum speed constantly,1,,GB
+ORA_003,Bangalore Repair Collective,2023-06-02,Laptop,Lenovo,,Battery drains within 15 minutes of unplugging,2,Spare parts not available,IN
+ORA_004,Repair Cafe International,2023-06-15,Desktop computer,Dell,,Power LED turns amber and system beeps twice,1,,DE
+ORA_005,Repair Cafe International,2023-07-20,Laptop,Acer,,Blank screen on power up keyboard lights up,3,Parts too expensive,US
+ORA_006,The Restart Project,2023-08-05,Laptop,Apple,,MacBook runs extremely hot and throttles CPU,1,,GB
+ORA_007,Repair Cafe Wales,2023-08-22,Desktop computer,HP,,Powers down unexpectedly after 5 minutes of gaming,1,,GB
+ORA_008,Bangalore Repair Collective,2023-09-01,Laptop,Dell,,DC jack is loose and laptop does not charge,1,,IN
+ORA_009,The Restart Project,2023-09-14,Laptop,Lenovo,,Display flickers when lid angle changes,2,No spare cable,GB
+ORA_010,Repair Cafe International,2023-10-10,Laptop,Asus,,Keyboard keys E R T Y not responding,3,Part unavailable,FR
+ORA_011,Bangalore Repair Collective,2023-10-25,Laptop,HP,,Loud grinding noise from internal cooling fan,1,,IN
+ORA_012,The Restart Project,2023-11-02,Small appliance,Philips,,Toaster lever does not stay down,1,,GB
+ORA_013,Repair Cafe Wales,2023-11-14,Mobile,Samsung,,Cracked glass screen touch still works,2,,GB
+ORA_014,Repair Cafe International,2023-11-20,Desktop computer,Lenovo,,Windows crashes with BSOD during boot,1,,DE
+ORA_015,Bangalore Repair Collective,2023-12-05,Laptop,Dell,,Battery swelling pushing trackpad up,3,Safety hazard,IN
+ORA_016,The Restart Project,2023-12-18,Laptop,HP,,Laptop shuts off abruptly when moved,1,,GB
+ORA_017,Repair Cafe International,2024-01-08,Audio equipment,Sony,,Headphones one side no sound,1,,US
+ORA_018,Bangalore Repair Collective,2024-01-22,Laptop,Acer,,Wi-Fi connection drops every few minutes,1,,IN
+ORA_019,The Restart Project,2023-04-12,Laptop,Dell,,Will not power on even when connected to original charger,1,,GB
+ORA_020,Repair Cafe Wales,2024-02-15,Laptop,,,Empty brand and problem test case,0,,GB
