@@ -57,39 +57,60 @@ export function getRecentCases(count = 4): RepairCase[] {
 // ── Fetch ORA cases from Backend ────────────────────────────────────────────
 
 export async function fetchOraCases(): Promise<RepairCase[]> {
+  // 1. Try Backend API first (when running locally or on server with Node.js)
   try {
     const res = await fetch('/api/cases/ora?limit=500');
-    if (!res.ok) return cachedOraCases;
-    const data = await res.json();
-    if (data && Array.isArray(data.cases)) {
-      cachedOraCases = data.cases.map((c: any) => ({
-        id: c.id,
-        brand: c.brand,
-        model: c.model || null,
-        category: c.device_category || 'Computer',
-        device_category: c.device_category,
-        symptoms: c.symptoms,
-        steps: c.troubleshooting_steps || null,
-        solution: c.final_solution || null,
-        sourceType: 'ora_public_dataset',
-        verificationStatus: c.verification_status || 'not_independently_verified',
-        createdAt: c.import_timestamp || c.created_at || new Date().toISOString(),
-        externalSourceId: c.external_source_id,
-        repairStatus: c.repair_status,
-        repairStatusRaw: c.repair_status_raw,
-        repairBarrier: c.repair_barrier,
-        country: c.country,
-        eventDate: c.event_date,
-        sourceProvider: c.source_provider,
-        datasetRelease: c.dataset_release || 'Open Repair Alliance Open Data',
-        license: c.license || 'CC BY-SA 4.0',
-      }));
+    if (res.ok) {
+      const data = await res.json();
+      if (data && Array.isArray(data.cases)) {
+        cachedOraCases = data.cases.map(normalizeOraRecord);
+        return cachedOraCases;
+      }
     }
-    return cachedOraCases;
-  } catch (err) {
-    console.warn('Could not fetch ORA cases from backend:', err);
-    return cachedOraCases;
+  } catch {
+    // Backend API not reachable (e.g. static GitHub Pages deployment)
   }
+
+  // 2. Static fallback for GitHub Pages
+  try {
+    const staticRes = await fetch(`${import.meta.env.BASE_URL}ora_cases.json`);
+    if (staticRes.ok) {
+      const list = await staticRes.json();
+      if (Array.isArray(list)) {
+        cachedOraCases = list.map(normalizeOraRecord);
+        return cachedOraCases;
+      }
+    }
+  } catch (e) {
+    console.warn('Could not load static ORA fallback:', e);
+  }
+
+  return cachedOraCases;
+}
+
+function normalizeOraRecord(c: any): RepairCase {
+  return {
+    id: c.id,
+    brand: c.brand,
+    model: c.model || null,
+    category: c.device_category || 'Computer',
+    device_category: c.device_category,
+    symptoms: c.symptoms,
+    steps: c.troubleshooting_steps || null,
+    solution: c.final_solution || null,
+    sourceType: 'ora_public_dataset',
+    verificationStatus: c.verification_status || 'not_independently_verified',
+    createdAt: c.import_timestamp || c.created_at || new Date().toISOString(),
+    externalSourceId: c.external_source_id,
+    repairStatus: c.repair_status,
+    repairStatusRaw: c.repair_status_raw,
+    repairBarrier: c.repair_barrier,
+    country: c.country,
+    eventDate: c.event_date,
+    sourceProvider: c.source_provider,
+    datasetRelease: c.dataset_release || 'Open Repair Alliance Open Data',
+    license: c.license || 'CC BY-SA 4.0',
+  };
 }
 
 export async function getAllCasesWithOra(): Promise<RepairCase[]> {
