@@ -2,7 +2,7 @@
 > **Find the Fix. Save the Time.**  
 > An AI-powered repair knowledge system that helps computer and laptop repair technicians find past fixes for their device symptoms.
 
-Built by **Team Eleven** — an MVP designed for small computer and laptop repair shops in India and worldwide.
+Built by **Team Eleven** — designed for computer and laptop repair shops in India and worldwide.
 
 ---
 
@@ -11,19 +11,26 @@ Built by **Team Eleven** — an MVP designed for small computer and laptop repai
 Computer and laptop repair technicians spend excessive time diagnosing faults they have encountered before because repair knowledge is scattered across personal notes, YouTube videos, forums, and informal chats. 
 
 **FixMemory** solves this by:
-1. **Intelligent Symptom-to-Fix Matching:** Enter a device model and its symptoms (e.g., *"HP Pavilion heats up and shuts down after 10 minutes"*); FixMemory retrieves historical repair cases with matching symptoms, troubleshooting steps, and verified solutions.
-2. **Technician Case Logging:** Technicians can quickly log their own successful repairs with structured categories, symptoms, troubleshooting steps, and final fixes.
-3. **Dual AI Mode:** Supports live Google Gemini AI matching via a secure Node.js backend route, with an automated, zero-config local heuristic search fallback if an API key is not configured.
-4. **Bilingual Accessibility:** Real-time English / తెలుగు (Telugu) toggle for vernacular workshop technicians.
-5. **Local-First Persistence:** Seeded with 10 real-world sample repair cases on first launch and stores technician contributions in browser `localStorage`. Includes a safe "Clear My Data" reset with confirmation.
+1. **Intelligent Symptom-to-Fix Matching:** Enter device symptoms (e.g., *"HP Pavilion heats up and shuts down after 10 minutes"*); FixMemory retrieves matching historical repair cases, troubleshooting steps, and verified solutions.
+2. **Technician Case Logging:** Technicians can document their successful repairs with structured categories, symptoms, troubleshooting steps taken, and final fixes.
+3. **Open Repair Alliance (ORDS) Integration:** Includes an admin pipeline to stream, validate, and import real-world historical repair event data from the Open Repair Alliance (under CC BY-SA 4.0), strictly preserving data trust (unrecorded steps/solutions are set to `null` and never hallucinated).
+4. **Dual AI Mode:** Supports live Google Gemini AI matching via a secure Node.js backend route, with an automated, zero-config local heuristic search fallback if an API key is not configured.
+5. **Bilingual Accessibility:** Real-time English / తెలుగు (Telugu) toggle for vernacular workshop technicians.
+6. **Hybrid Storage & Database Architecture:**
+   - Preloaded sample repair records and technician-contributed cases in browser `localStorage`.
+   - Supabase PostgreSQL schema with duplicate prevention for external datasets (`supabase/migrations/20261101_repair_cases.sql`).
+   - Automated Local Test Mode fallback (`server/data/ora_cases.json`) when Supabase credentials are not provided.
 
 ---
 
 ## 🛠️ Tech Stack
 
 - **Frontend:** React 19, TypeScript, Vite, Tailwind CSS v4, Lucide React, React Router v7.
-- **Backend:** Node.js Express server (`server/index.js`) providing a secure `/api/match` proxy to Google Generative AI (`gemini-1.5-flash`).
-- **Data Persistence:** Browser `localStorage` with sample data auto-seeding.
+- **Backend:** Node.js Express server (`server/index.js`) providing:
+  - `/api/match` (Google Gemini 1.5 Flash AI diagnostic matching + heuristic pre-filter)
+  - `/api/admin/ora/preview` and `/api/admin/ora/import` (streaming CSV parser via `csv-parse` and `multer`)
+  - `/api/cases/ora` (query imported historical records)
+- **Database / Storage:** Dual Supabase PostgreSQL / Local Test Mode with deduplication.
 
 ---
 
@@ -35,38 +42,42 @@ Computer and laptop repair technicians spend excessive time diagnosing faults th
 
 ### 2. Installation
 ```bash
-git clone <repo-url>
+git clone https://github.com/bprudhvi143/FixMemory-AI-Powered-Repair-Knowledge-System.git
 cd FixMemory
 npm install
 ```
 
-### 3. Environment Variables (Optional for Live Gemini)
-Create a `.env` file in the root directory:
+### 3. Environment Variables (Optional)
+Copy `.env.example` to `.env`:
 ```bash
 cp .env.example .env
 ```
-Inside `.env`, add your Gemini API key:
+Inside `.env`, you can optionally add:
 ```env
+# Gemini API Key (get from https://aistudio.google.com/app/apikey)
 GEMINI_API_KEY=your_gemini_api_key_here
+
+# Optional: Supabase PostgreSQL (defaults to Local Test Mode if not set)
+SUPABASE_URL=your_supabase_url_here
+SUPABASE_SERVICE_ROLE_KEY=your_supabase_service_key_here
+
+# Server Port
 PORT=3001
 ```
-> *Note: If no API key is provided, FixMemory automatically operates in **Demo Mode**, utilizing high-speed local keyword matching and simulated diagnostic causes without breaking or blocking the user.*
 
 ### 4. Run Locally
 To run both the Vite frontend and Express backend concurrently:
 ```bash
 npm run dev
 ```
-- **Frontend:** `http://localhost:5173`
+- **Web App (Frontend):** `http://localhost:5173/FixMemory-AI-Powered-Repair-Knowledge-System/`
 - **Backend API:** `http://localhost:3001`
+- **Admin Importer:** `http://localhost:5173/FixMemory-AI-Powered-Repair-Knowledge-System/admin/import`
 
 Or run them individually:
 ```bash
-# Frontend only
-npm run dev:frontend
-
-# Backend server only
-npm run dev:server
+npm run dev:frontend   # Vite frontend on port 5173
+npm run dev:server     # Express server on port 3001
 ```
 
 ### 5. Production Build
@@ -80,54 +91,27 @@ npm run preview
 ## 🧪 5-Step Testing Checklist
 
 1. **Explore Recent Cases & Open Case Details Modal:**
-   - On the Home page (`http://localhost:5173`), scroll to **Recent Repair Cases**.
-   - Notice the 4 initial cases tagged with the amber **Sample** badge.
+   - On the Home page, scroll to **Recent Repair Cases**.
    - Click **"View Full Case"** on any card to open the interactive modal displaying full device details, symptoms, troubleshooting steps taken, and final solution.
-2. **Search Historical Symptoms:**
-   - In the search bar on Home, click the sample search pill: *"HP Pavilion heats up and shuts down after 10 minutes"* (or type any symptom like *"flicker"* or *"power"*), then click **Find Solutions**.
-   - On `/results`, verify the **Search Summary**, **Possible Causes**, and **Matching Repair Cases** with relevance reasons.
+2. **Search Historical Symptoms (Technician & ORA Records):**
+   - Click the suggested pill: *"HP Pavilion heats up and shuts down after 10 minutes"* (or search *"Dell laptop power problems"* or *"battery"*).
+   - On `/results`, verify **Possible Causes**, matched cases, and distinct badges (`Technician Submitted`, `Sample`, `Open Repair Alliance`).
 3. **Log a New Repair Case:**
    - Click **Log Case** in the navigation bar.
-   - Enter a new repair:
-     - **Brand:** `Asus`
-     - **Model:** `ZenBook 14`
-     - **Category:** `Display`
-     - **Symptoms:** `Screen flickers and blacks out when hinge moves past 90 degrees.`
-     - **Troubleshooting Steps Taken:** `Tested external HDMI monitor; inspected eDP cable.`
-     - **Final Solution:** `Replaced worn eDP ribbon cable at display hinge.`
-   - Click **Save Repair Case**. Verify the success screen.
-4. **Verify Retrieval of Newly Logged Case:**
-   - Click **Back to Home**. Observe that the new case appears at the top of **Recent Repair Cases** with a green **Technician Submitted** badge.
-   - Search for *"Asus hinge"* or *"Asus display"* in the search bar. Verify that your newly logged case is retrieved as a match!
-5. **Test Language Toggle & Clear My Data:**
-   - Click the language toggle button in the navbar (**తెలుగు**). Confirm that navigation, buttons, and section titles instantly switch to Telugu. Click **English** to switch back.
-   - Go to **About** page. Scroll to the bottom and click **Clear My Data**. Confirm in the dialog to restore the original 10 sample records.
+   - Enter a new repair (e.g. *Asus ZenBook 14*, Display, screen flicker, replaced eDP ribbon cable) and save.
+   - Return to Home: your new case appears immediately at the top with a green **Technician Submitted** badge!
+4. **Test the Admin ORA Dataset Importer:**
+   - Navigate to `/admin/import`.
+   - Upload `server/data/test_ora_20.csv` or `test_ora_100.csv`.
+   - Preview the first 10 rows and check filtering (Laptops/Desktops only, invalid rows flagged, duplicates detected).
+   - Click **Confirm & Import**. Verify that imported records are instantly searchable without overwriting technician cases.
+5. **Test Language Toggle & Attribution:**
+   - Click **తెలుగు** in the navbar: UI instantly translates to Telugu. Click **English** to switch back.
+   - Go to **About**: view the Open Repair Alliance provenance notice and CC BY-SA 4.0 license information.
 
 ---
 
-## 🌐 Deployment Instructions
+## 📜 Licensing & Attribution
 
-### Option A: Vercel (Recommended for Frontend + Serverless)
-1. Push the repository to GitHub.
-2. Import the project in Vercel.
-3. Add an Environment Variable: `GEMINI_API_KEY`.
-4. Deploy!
-
-### Option B: Render / Railway / VPS (Full Stack)
-1. Deploy the backend Express server (`node server/index.js`) to Render or Railway with `GEMINI_API_KEY`.
-2. Build the Vite frontend with `npm run build` and point the `/api` proxy/base URL to the hosted backend.
-
----
-
-## 🔮 5 Ideas for Version 2
-
-1. **Component-Level Tagging & Parts Cross-Reference:**
-   - Allow technicians to log specific component part numbers (e.g., motherboards, display panels, charging IC numbers like `BQ24780S`) to find exact hardware replacements.
-2. **Image & Schematic Attachment:**
-   - Enable technicians to take and attach photos of burnt motherboard traces, microscopic solder points, or boardview schematics to repair cards.
-3. **WhatsApp / PWA Offline Support:**
-   - Technicians in small stalls often have intermittent connectivity; enable IndexedDB offline caching and a WhatsApp bot for submitting and querying fixes via quick voice or text messages.
-4. **Shop Team Knowledge Base & Permissions:**
-   - Multi-tenant workspaces where shop owners can view aggregate repair metrics, track technician throughput, and share a private shop-only database of fixes.
-5. **Peer Verification & Reputation Upvotes:**
-   - Enable technicians to upvote solutions that worked for them ("Confirmed Fix"), raising community trust and ranking the most reliable solutions first.
+- FixMemory core application is developed by **Team Eleven**.
+- Imported repair event records originate from the **Open Repair Alliance** ([ORDS standard](https://openrepair.org/open-data/downloads/)) and are shared under the **Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)** license.

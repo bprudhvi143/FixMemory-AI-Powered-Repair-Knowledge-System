@@ -47,3 +47,4 @@ CREATE INDEX IF NOT EXISTS idx_repair_cases_repair_status ON repair_cases(repair
 COMMENT ON TABLE repair_cases IS 'Consolidated repair repository storing technician fixes and Open Repair Alliance records.';
 COMMENT ON COLUMN repair_cases.verification_status IS 'Specifies whether the case is verified, technician-submitted, sample, or not independently verified.';
 COMMENT ON COLUMN repair_cases.repair_status IS 'Normalised repair outcome (Fixed, Repairable, End of life, Unknown).';
+
